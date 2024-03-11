@@ -15,8 +15,8 @@
             <div class="container-input-preco-consultar-comprar">
                 <div class="container-input-consultar-comprar">
                     <div class="input-consultar">
-                        <input type="text" placeholder="Código ou nome do produto">
-                        <div class="botao-consulta">
+                        <input id="Produto" type="text" placeholder="Código ou nome do produto">
+                        <div id="botao-consulta" onclick="consultar">
                             Consultar
                         </div>
                     </div>
@@ -24,13 +24,15 @@
                         <img src="assets/cart.png" alt="buy" width="40px" height="40px">
                     </div>
                 </div>
-                <div class="valor-produto">
-                    $29,99
+                <div id="valor-produto">
+                    $
                 </div>
             </div>
         </div>
     </div>
 
 </body>
+
+<script src="script.js"></script>
 
 </html>
