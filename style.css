@@ -52,7 +52,7 @@ input{
 
 }
 
-.botao-comprar{
+#botao-comprar{
     background-color: var(--laranja);
     border-radius: 60px;
     height: 70px;

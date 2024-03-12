@@ -1,24 +1,3 @@
-
-
-
-document.getElementById("botao-consulta").addEventListener('click', consultarApresentar);
-
-
-
-function consultarApresentar() {
-
-    escolha = consultar();
-
-    if (typeof escolha === 'number') {
-        document.getElementById("valor-produto").innerHTML = "RS " + escolha
-
-    } else {
-        document.getElementById("valor-produto").innerHTML = escolha
-    }
-}
-
-
-
 function consultar() {
 
     let produtoDesejado = document.getElementById("Produto").value.toUpperCase();
@@ -55,3 +34,37 @@ function consultar() {
 }
 
 
+
+
+document.getElementById("botao-consulta").addEventListener('click', consultarApresentar);
+function consultarApresentar() {
+
+    escolha = consultar();
+
+    if (typeof escolha === 'number') {
+        document.getElementById("valor-produto").innerHTML = "RS " + escolha
+
+    } else {
+        document.getElementById("valor-produto").innerHTML = escolha
+    }
+}
+
+
+document.getElementById("botao-comprar").addEventListener('click', addCarrinho);
+let carrinho=[];
+function addCarrinho() {
+    let produtoDesejado = document.getElementById("Produto").value.toUpperCase();
+     escolha=consultar()
+
+
+     if (typeof escolha === 'number') {
+        carrinho.push({nome:produtoDesejado, preco:escolha})
+
+        
+
+    } else {
+        alert("Necessário um item válido")
+    }
+
+    return console.log(carrinho)
+}
