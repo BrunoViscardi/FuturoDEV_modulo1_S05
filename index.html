@@ -20,7 +20,7 @@
                             Consultar
                         </div>
                     </div>
-                    <div id="botao-comprar" onclick="addCarrinho">
+                    <div id="botao-comprar" onclick="addCarrinho" onclick="totalCarrinhoApresentar('valor-total')">
                         <img src="assets/cart.png" alt="buy" width="40px" height="40px">
                     </div>
                 </div>
@@ -28,8 +28,16 @@
                     $
                 </div>
             </div>
+            <div class="container-valor-total-dinamico">
+
+                <div id="valor-total-dinamico" onclick="totalCarrinhoApresentar('valor-total-dinamico')">
+                    $$$
+                </div>
+
+            </div>
+
             <div class="container-consultar-carrinho">
-                <div id="botao-consulta-carrinho" onclick="totalCarrinhoApresentar">
+                <div id="botao-consulta-carrinho">
                     Consultar Total
                 </div>
                 <div id="valor-total">

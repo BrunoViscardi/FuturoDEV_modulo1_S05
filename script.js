@@ -51,6 +51,7 @@ function consultarApresentar() {
 document.getElementById("botao-comprar").addEventListener('click', addCarrinho);
 let carrinho=[];
 function addCarrinho() {
+    
     let produtoDesejado = document.getElementById("Produto").value.toUpperCase();
      escolha=consultar()
 
@@ -68,8 +69,9 @@ function addCarrinho() {
 }
 
 
-let total=0;
+
 function FuncaoTotalCarrinho() {
+    let total=0;
     for (let i = 0; i < carrinho.length; i++) {
         total += carrinho[i].preco;
     }
@@ -77,18 +79,19 @@ function FuncaoTotalCarrinho() {
 }
 
 
-document.getElementById("botao-consulta-carrinho").addEventListener('click', totalCarrinhoApresentar);
-function totalCarrinhoApresentar() {
+document.getElementById("botao-consulta-carrinho").addEventListener('click', function() { totalCarrinhoApresentar("valor-total")});
+function totalCarrinhoApresentar(local) {
     let TotalCarrinho = FuncaoTotalCarrinho()
 
     if (TotalCarrinho!=0) {
-        document.getElementById("valor-total").innerHTML = "R$ " + TotalCarrinho.toFixed(2)
+        document.getElementById(local).innerHTML = "R$ " + TotalCarrinho.toFixed(2)
 
     } else {
-        document.getElementById("valor-total").innerHTML = "Carrinho vazio"
+        document.getElementById(local).innerHTML = "Carrinho vazio"
         
-    }
-
-    
+    }    
 }
+
+//Adiciona o tatol de forma dinâmica
+document.getElementById("botao-comprar").addEventListener('click', function() {totalCarrinhoApresentar("valor-total-dinamico")});
 
