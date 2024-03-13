@@ -109,7 +109,6 @@ input{
     width: auto;
 }
 
-
 #valor-total{
     background-color: var(--cinza);
     flex: 1;
@@ -120,5 +119,41 @@ input{
     color: var(--azul);
     font-weight: 600;
     
+}
+
+.container-lista-compras{
+    background-color: var(--cinza);
+    border-radius: 8px;
+    width: calc(100% - 80px);
+    display: block;
+    margin-top: 20px;
+    margin-right: 80px;
+}
+
+#conteudo-lista-compras{
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 40px);
+    padding: 10px 20px;
+}
+
+.titulo-lista-compras{
+    padding: 20px 20px 10px 20px;
+    border-bottom: var(--laranja) 1px solid;
+    font-weight: 600;
+}
+
+.container-valor-total-dinamico{
+    padding: 10px 20px;
+    border-top: var(--laranja) 1px solid;
+    text-align: end;
+}
+
+span{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: .5px 0;
+    border-bottom: rgba(128, 128, 128, 0.275) 1px dotted;
 }
 

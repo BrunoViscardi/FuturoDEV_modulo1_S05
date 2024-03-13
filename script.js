@@ -22,7 +22,7 @@ function consultar() {
             break;
         case "05":
         case "ABACATE":
-            escolha = 7.50
+            escolha = 7.56
             break;
         default:
             escolha = "Não há correspondência"
@@ -30,8 +30,9 @@ function consultar() {
     }
 
     return escolha;
-
 }
+
+
 
 
 document.getElementById("botao-consulta").addEventListener('click', consultarApresentar);
@@ -49,29 +50,25 @@ function consultarApresentar() {
 
 
 document.getElementById("botao-comprar").addEventListener('click', addCarrinho);
-let carrinho=[];
+let carrinho = [];
 function addCarrinho() {
-    
+
     let produtoDesejado = document.getElementById("Produto").value.toUpperCase();
-     escolha=consultar()
+    escolha = consultar()
 
 
-     if (typeof escolha === 'number') {
-        carrinho.push({nome:produtoDesejado, preco:escolha})
-
-        
-
+    if (typeof escolha === 'number') {
+        carrinho.push({ nome: produtoDesejado, preco: escolha })
     } else {
         alert("Necessário um item válido")
     }
-
     return console.log(carrinho)
 }
 
 
 
 function FuncaoTotalCarrinho() {
-    let total=0;
+    let total = 0;
     for (let i = 0; i < carrinho.length; i++) {
         total += carrinho[i].preco;
     }
@@ -79,19 +76,41 @@ function FuncaoTotalCarrinho() {
 }
 
 
-document.getElementById("botao-consulta-carrinho").addEventListener('click', function() { totalCarrinhoApresentar("valor-total")});
+document.getElementById("botao-consulta-carrinho").addEventListener('click', function () { totalCarrinhoApresentar("valor-total") });
 function totalCarrinhoApresentar(local) {
     let TotalCarrinho = FuncaoTotalCarrinho()
 
-    if (TotalCarrinho!=0) {
-        document.getElementById(local).innerHTML = "R$ " + TotalCarrinho.toFixed(2)
+    if (TotalCarrinho != 0) {
+        document.getElementById(local).innerHTML = "Total: R$ " + TotalCarrinho.toFixed(2)
 
     } else {
         document.getElementById(local).innerHTML = "Carrinho vazio"
-        
-    }    
+
+    }
 }
 
-//Adiciona o tatol de forma dinâmica
-document.getElementById("botao-comprar").addEventListener('click', function() {totalCarrinhoApresentar("valor-total-dinamico")});
+//Adiciona o total de forma dinâmica
+document.getElementById("botao-comprar").addEventListener('click', function () { totalCarrinhoApresentar("valor-total-dinamico") });
 
+
+
+//Adiciona item na lista de compras de forma dinâmica
+document.getElementById("botao-comprar").addEventListener('click', addItemLista);
+function addItemLista() {
+    //define os itens e respectivos preços
+    item = carrinho[carrinho.length - 1].nome;
+    preco = carrinho[carrinho.length - 1].preco;
+    //cria um novo span
+    let novoSpan = document.createElement("span");
+    //cria novos paragrafos
+    let pItem = document.createElement("p")
+    let pPreco = document.createElement("p")
+    //cria textos e adiciona nos novos paragrafos criados
+    pItem.appendChild(document.createTextNode(item))
+    pPreco.appendChild(document.createTextNode("R$ " + preco))
+    //adiciona os paragrafos dentro do span
+    novoSpan.appendChild(pItem);
+    novoSpan.appendChild(pPreco);
+    //mapeia o local que será colocado a lista e adiciona
+    document.getElementById("conteudo-lista-compras").appendChild(novoSpan);
+}
