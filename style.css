@@ -147,6 +147,7 @@ input{
     padding: 10px 20px;
     border-top: var(--laranja) 1px solid;
     text-align: end;
+    font-weight: 600;
 }
 
 span{
