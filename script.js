@@ -106,3 +106,11 @@ function addItemLista() {
         return
     }
 }
+
+
+//Adiciona o número de itens de forma dinâmica
+document.getElementById("botao-comprar").addEventListener('click',n_itens)
+function n_itens() {
+    let contagem=carrinho.length
+    document.getElementById("numero-itens").innerHTML = contagem
+}

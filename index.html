@@ -11,7 +11,7 @@
 <body>
     <div class="body-container">
         <div class="body-conteudo">
-            <div class="logo"> <img src="assets/door.png" alt="logo" width="120px" height="120px"></div>
+            <div class="logo"> <img src="assets/lunch.png" alt="logo" width="120px" height="120px"></div>
             <div class="container-input-preco-consultar-comprar">
                 <div class="container-input-consultar-comprar">
                     <div class="input-consultar">
@@ -21,12 +21,12 @@
                         </div>
                     </div>
                     <div id="botao-comprar" onclick="addCarrinho" onclick="totalCarrinhoApresentar('valor-total')"
-                        onclick="addItemLista">
+                        onclick="addItemLista" onclick="n_itens">
                         <img src="assets/cart.png" alt="buy" width="40px" height="40px">
                     </div>
                 </div>
                 <div id="valor-produto">
-                    $
+                    
                 </div>
             </div>
             <div class="container-lista-compras">
@@ -45,6 +45,15 @@
 
 
             <div class="container-consultar-carrinho">
+                <div class="container-itens">
+                    <div>
+                        itens
+                    </div>
+                    <div id="numero-itens">
+                        0
+                    </div>
+
+                </div>
                 <div id="botao-consulta-carrinho">
                     Consultar Total
                 </div>
