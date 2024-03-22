@@ -38,6 +38,8 @@ function consultarApresentar() {
 }
 
 //criação de evento e função para adicionar um produto válido ao carrinho
+localStorage.setItem("carrinho","[]")//Criação de uma pseudovariável no localStorage
+
 document.getElementById("botao-comprar").addEventListener('click', addCarrinho);
 let carrinho = [];
 function addCarrinho() {
@@ -46,10 +48,19 @@ function addCarrinho() {
 
     if (typeof escolha.preco === 'number') {
         carrinho.push(escolha)
+
+        //Atualizando o LocalStorage
+        NoLocalStorage = JSON.parse(localStorage.getItem("carrinho")) //leitura do localStorage
+        NoLocalStorage.push(escolha) //Adição da escolha
+
+        localStorage.setItem("carrinho",JSON.stringify(NoLocalStorage))  //atualização do localStorage
+
+
     } else {
         alert("Necessário um item válido")
     }
-    return console.log(carrinho)
+    //return console.log(carrinho)
+
 }
 
 
