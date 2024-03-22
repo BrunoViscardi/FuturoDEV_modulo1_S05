@@ -38,10 +38,8 @@ function consultarApresentar() {
 }
 
 //criação de evento e função para adicionar um produto válido ao carrinho
-localStorage.setItem("carrinho","[]")//Criação de uma pseudovariável no localStorage
-
 document.getElementById("botao-comprar").addEventListener('click', addCarrinho);
-let carrinho = [];
+let carrinho=InicioApp() /////////////////////////////////////////////////////////
 function addCarrinho() {
 
     escolha = consultar()
@@ -52,20 +50,18 @@ function addCarrinho() {
         //Atualizando o LocalStorage
         NoLocalStorage = JSON.parse(localStorage.getItem("carrinho")) //leitura do localStorage
         NoLocalStorage.push(escolha) //Adição da escolha
-
         localStorage.setItem("carrinho",JSON.stringify(NoLocalStorage))  //atualização do localStorage
 
 
     } else {
         alert("Necessário um item válido")
     }
-    //return console.log(carrinho)
 
 }
 
 
 //função que passa todo o array carrinho e calcula seu preço total
-function FuncaoTotalCarrinho() {
+function FuncaoTotalCarrinho(carrinho) {
     let total = 0;
     for (let i = 0; i < carrinho.length; i++) {
         total += carrinho[i].preco;
@@ -75,9 +71,9 @@ function FuncaoTotalCarrinho() {
 
 
 //criação de evento e função que apresenta o valor total do carrinho em determinado local reservado para tal. Se o carrinho estiver vazio, essa msg aparecerá informando.
-document.getElementById("botao-consulta-carrinho").addEventListener('click', function () { totalCarrinhoApresentar("valor-total") });
-function totalCarrinhoApresentar(local) {
-    let TotalCarrinho = FuncaoTotalCarrinho()
+document.getElementById("botao-consulta-carrinho").addEventListener('click', function () { totalCarrinhoApresentar(carrinho,"valor-total") });
+function totalCarrinhoApresentar(carrinho,local) {
+    let TotalCarrinho = FuncaoTotalCarrinho(carrinho)
 
     if (TotalCarrinho != 0) {
         document.getElementById(local).innerHTML = "Total: R$ " + TotalCarrinho.toFixed(2)
@@ -89,39 +85,81 @@ function totalCarrinhoApresentar(local) {
 
 
 //Adiciona o total de forma dinâmica
-document.getElementById("botao-comprar").addEventListener('click', function () { totalCarrinhoApresentar("valor-total-dinamico") });
+document.getElementById("botao-comprar").addEventListener('click', function () { totalCarrinhoApresentar(carrinho,"valor-total-dinamico") });
 
 
 
 //Adiciona item na lista de compras de forma dinâmica
-document.getElementById("botao-comprar").addEventListener('click', addItemLista);
-function addItemLista() {
+document.getElementById("botao-comprar").addEventListener('click', function () {addItemLista(carrinho)});
+function addItemLista(carrinho) {
     //A função só será executada se houver produto correspondente, se for retornado um preço válido
     if (typeof escolha.preco === 'number') {
         //define os itens e respectivos preços
         item = carrinho[carrinho.length - 1].nome;
         preco = carrinho[carrinho.length - 1].preco;
-        //cria um novo span
-        let novoSpan = document.createElement("span");
-        //cria novos paragrafos
-        let pItem = document.createElement("p")
-        let pPreco = document.createElement("p")
-        //cria textos e adiciona nos novos paragrafos criados
-        pItem.appendChild(document.createTextNode(item))
-        pPreco.appendChild(document.createTextNode("R$ " + preco))
-        //adiciona os paragrafos dentro do span
-        novoSpan.appendChild(pItem);
-        novoSpan.appendChild(pPreco);
-        //mapeia o local que será colocado a lista e adiciona
-        document.getElementById("conteudo-lista-compras").appendChild(novoSpan);
+        ModificaHTML(item,preco)
         return
     }
 }
 
+function ModificaHTML(item,preco) {
+    //cria um novo span
+    let novoSpan = document.createElement("span");
+    //cria novos paragrafos
+    let pItem = document.createElement("p")
+    let pPreco = document.createElement("p")
+    //cria textos e adiciona nos novos paragrafos criados
+    pItem.appendChild(document.createTextNode(item))
+    pPreco.appendChild(document.createTextNode("R$ " + preco))
+    //adiciona os paragrafos dentro do span
+    novoSpan.appendChild(pItem);
+    novoSpan.appendChild(pPreco);
+    //mapeia o local que será colocado a lista e adiciona
+    document.getElementById("conteudo-lista-compras").appendChild(novoSpan);
+}
+
 
 //Adiciona o número de itens de forma dinâmica
-document.getElementById("botao-comprar").addEventListener('click',n_itens)
-function n_itens() {
+document.getElementById("botao-comprar").addEventListener('click',function() {n_itens(carrinho)})
+function n_itens(carrinho) {
     let contagem=carrinho.length
     document.getElementById("numero-itens").innerHTML = contagem
 }
+
+
+
+
+//Função que inicializará local Storage, a criação da lista de compras se houver algo no LocalStorage e também o número de itens
+function InicioApp() {
+
+    if (localStorage.getItem("carrinho") == undefined) {
+        let carrinhoStorage = localStorage.setItem("carrinho","[]")
+
+        totalCarrinhoApresentar(carrinhoStorage, "valor-total-dinamico")
+
+        
+        
+    } else {
+        let carrinhoStorage = JSON.parse(localStorage.getItem("carrinho"))
+         //Numero de itens
+     n_itens(carrinhoStorage)
+
+     //Lista de compras
+     for (let index = 0; index < carrinhoStorage.length; index++) {
+         item = carrinhoStorage[index].nome;
+         preco = carrinhoStorage[index].preco;
+         ModificaHTML(item,preco)
+     }
+ 
+     //total dinâmico
+     totalCarrinhoApresentar(carrinhoStorage, "valor-total-dinamico")
+
+
+     return carrinhoStorage
+        
+    }
+    
+}
+
+
+
